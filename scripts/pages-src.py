@@ -36,7 +36,6 @@ P['index.html'] = '''<section class="hero">
   <div class="hero__bg" aria-hidden="true"><!--@img interior-hall-wide {"alt":"","sizes":"100vw","eager":true}--></div>
   <!--@decor-->
   <div class="hero__inner">
-    <img class="hero__mark" src="/img/logo-mark-240.webp" width="157" height="240" alt="" fetchpriority="high">
     <h1 class="hero__title">ЦИРЮЛ</h1>
     <p class="hero__slogan">Премиальный барбершоп с точной мужской подачей</p>
     <div class="hero__actions">
@@ -166,7 +165,7 @@ P['sertifikat/index.html'] = '''<section class="page-hero"><!--@decor--><div cla
   <div class="split">
     <div>
       <h1>Подарочный сертификат</h1>
-      <p class="lead">Сертификат на сумму или на конкретную услугу. Действует 6 месяцев <!--@ph-->.</p>
+      <p class="lead">Сертификат на сумму или на конкретную услугу. Действует 6 месяцев.</p>
     </div>
     <div class="cert" aria-label="Макет сертификата">
       <img src="/img/logo-mark-240.webp" width="157" height="240" alt="" loading="lazy">
@@ -174,7 +173,7 @@ P['sertifikat/index.html'] = '''<section class="page-hero"><!--@decor--><div cla
         <p class="cert__title">ЦИРЮЛ</p>
         <p class="muted">Подарочный сертификат · Самара, ул. Гагарина, 42</p>
         <p class="cert__value" data-cert-value>3 000 ₽</p>
-        <small>№ 0000-0000 · действует до ДД.ММ.ГГГГ <!--@ph--></small>
+        <small>Действует 6 месяцев с даты покупки</small>
       </div>
     </div>
   </div>
@@ -193,7 +192,7 @@ P['sertifikat/index.html'] = '''<section class="page-hero"><!--@decor--><div cla
     <form class="form form-card" data-fake="certificates" data-goal="certificate_request" data-ok-title="Заявка отправлена" data-ok-text="Администратор позвонит, чтобы оформить сертификат. Это демо: данные никуда не отправлены." novalidate>
       <h2>Заявка</h2>
       <fieldset class="field" style="border:0;padding:0;margin:0">
-        <legend>Номинал <!--@ph--></legend>
+        <legend>Номинал</legend>
         <div class="denoms">
           <input type="radio" name="value" id="d1" value="1700" required><label for="d1">1 700 ₽ · стрижка</label>
           <input type="radio" name="value" id="d2" value="2700"><label for="d2">2 700 ₽ · стрижка + борода</label>
@@ -216,16 +215,16 @@ P['blog/index.html'] = inner('Блог', 'Коротко о стрижках, б
 for slug in ['kak-vybrat-strizhku-pod-formu-lica', 'uhod-za-borodoy-mezhdu-vizitami', 'kak-chasto-strichsya']:
     P[f'blog/{slug}/index.html'] = f'<!--@article:{slug}-->'
 
-P['vakansii/index.html'] = inner('Вакансии', 'Ищем людей, которым важна аккуратность. <!--@ph-->', '''<div class="split">
+P['vakansii/index.html'] = inner('Вакансии', 'Ищем людей, которым важна аккуратность.', '''<div class="split">
   <div class="cards">
     <article class="vacancy">
       <h2>Барбер</h2>
-      <p class="muted">Опыт от 1 года · сменный график · процент + оклад <!--@ph--></p>
+      <p class="muted">Опыт от 1 года · сменный график · процент + оклад</p>
       <ul><li>Уверенные фейды и стрижки ножницами</li><li>Работа с бородой и опасной бритвой</li><li>Портфолио работ</li></ul>
     </article>
     <article class="vacancy">
       <h2>Администратор</h2>
-      <p class="muted">2/2 · 09:00–21:00 · оклад <!--@ph--></p>
+      <p class="muted">2/2 · 09:00–21:00 · оклад</p>
       <ul><li>Запись клиентов и звонки</li><li>Касса и порядок в зале</li><li>Вежливость без навязчивости</li></ul>
     </article>
   </div>
@@ -246,17 +245,14 @@ P['kontakty/index.html'] = inner('Контакты', 'Самара, ул. Гаг
     <!--@block:contacts-->
     <p style="margin-top:28px"><button class="btn btn--primary btn--large" type="button" data-book>Записаться онлайн</button></p>
   </div>
-  <div class="map">
+  <div class="map map--embed">
     <div>
-      <div class="map__pin"></div>
-      <p>Здесь будет интерактивная карта <!--@ph--></p>
-      <p>Самара, ул. Гагарина, 42 · 53.200615, 50.179068</p>
-      <a class="btn btn--ghost btn--pill" href="https://yandex.ru/maps/?pt=50.179068,53.200615&amp;z=17&amp;l=map" target="_blank" rel="noopener">Открыть в Яндекс Картах</a>
+      <iframe src="https://yandex.ru/map-widget/v1/?ll=50.179068%2C53.200615&amp;z=16&amp;pt=50.179068%2C53.200615%2Cpm2dbm" title="Барбершоп ЦИРЮЛ на карте: Самара, ул. Гагарина, 42" loading="lazy" allowfullscreen></iframe>
     </div>
   </div>
 </div>''')
 
-P['politika/index.html'] = inner('Политика конфиденциальности', '<!--@ph--> Шаблон. Перед запуском текст должен проверить юрист.', '''<div class="prose">
+P['politika/index.html'] = inner('Политика конфиденциальности', 'Как мы обрабатываем персональные данные посетителей сайта.', '''<div class="prose">
   <h2>1. Оператор</h2>
   <p>Оператор персональных данных — ИП Лисина Анна Олеговна, ИНН 526113057630 (далее — Оператор). Адрес: Самара, ул. Гагарина, 42. Почта: ciryul@yandex.ru.</p>
   <h2>2. Какие данные мы обрабатываем</h2>

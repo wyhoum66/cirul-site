@@ -8,7 +8,7 @@ const { contacts: C } = site;
 
 const esc = (s = '') => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const rub = (n) => `${n.toLocaleString('ru-RU').replace(/ /g, ' ')} ₽`;
-const PH = '<span class="ph">[ЗАГЛУШКА]</span>';
+const PH = '';
 
 export function routeFromFile(file, root) {
   const rel = file.replace(/\\/g, '/').replace(root.replace(/\\/g, '/'), '').replace(/^\//, '');
@@ -138,7 +138,7 @@ export function head(route) {
   <link rel="apple-touch-icon" href="/favicon-180.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Forum&display=swap">
   <link rel="stylesheet" href="/src/styles/main.css">
   <script type="module" src="/src/js/main.js"></script>
   ${schemas.map(ld).join('\n  ')}`;
@@ -269,7 +269,7 @@ const blocks = {
           const name = sp ? `<a href="{{B}}${sp.slug}/">${i.name}</a>` : i.name;
           return `<li class="price__row">
           <span class="price__name">${name}${i.note ? `<small>${i.note}</small>` : ''}</span>
-          <span class="price__dur">${i.duration} мин ${PH}</span>
+          <span class="price__dur">${i.duration} мин</span>
           <span class="price__val">${rub(i.price)}</span>
           <button class="btn btn--small" type="button" data-book data-book-service="${i.id}" aria-label="Записаться: ${esc(i.name)}">Записаться</button>
         </li>`;
@@ -294,15 +294,15 @@ const blocks = {
     return `<ul class="cards cards--promos">${list.map((p) => `<li class="promo reveal" id="${p.id}">
       <h3>${p.title}</h3>
       <p>${p.text}</p>
-      <p class="promo__terms">${p.terms.replace('[ЗАГЛУШКА]', PH)}</p>
+      <p class="promo__terms">${p.terms}</p>
       ${p.link ? `<a class="btn btn--ghost btn--small" href="{{B}}${p.link}">Выбрать сертификат</a>` : `<button class="btn btn--primary btn--small" type="button" data-book data-book-service="${p.service}" data-book-promo="${esc(p.title)}">Записаться по акции</button>`}
     </li>`).join('')}</ul>`;
   },
 
   masters: () => `<ul class="cards cards--masters">${site.masters.map((m) => `<li class="master reveal">
-      <div class="master__photo">${m.photo ? img(m.photo, { alt: m.photoAlt, sizes: '(min-width: 1000px) 30vw, 90vw' }) : `<div class="master__ph"><img src="/img/logo-mark-240.webp" width="157" height="240" alt="" loading="lazy"><span>Фото мастера ${PH}</span></div>`}</div>
-      <h3>${m.name}${m.placeholderName ? ` <span class="ph">[проверить имя]</span>` : ''}</h3>
-      <p class="master__spec">${m.spec} ${PH}</p>
+      <div class="master__photo">${m.photo ? img(m.photo, { alt: m.photoAlt, sizes: '(min-width: 1000px) 30vw, 90vw' }) : `<div class="master__ph"><img src="/img/logo-mark-240.webp" width="157" height="240" alt="" loading="lazy"></div>`}</div>
+      <h3>${m.name}</h3>
+      <p class="master__spec">${m.spec}</p>
       <button class="btn btn--ghost btn--small" type="button" data-book data-book-master="${m.id}">Записаться к мастеру</button>
     </li>`).join('')}</ul>`,
 
@@ -337,7 +337,7 @@ const blocks = {
       <a href="{{B}}blog/${p.slug}/" class="post__media" tabindex="-1" aria-hidden="true">${img(p.image, { alt: '', sizes: '(min-width: 900px) 33vw, 100vw' })}</a>
       <p class="post__date"><time datetime="${p.date}">${new Date(p.date).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' })}</time></p>
       <h2><a href="{{B}}blog/${p.slug}/">${p.title}</a></h2>
-      <p>${p.excerpt} ${PH}</p>
+      <p>${p.excerpt}</p>
     </li>`).join('')}</ul>`,
 
   consent: (id) => consent(id || 'consent'),
@@ -387,10 +387,10 @@ export function servicePage(slug) {
     <div class="service">
       <div class="service__text">
         <h1>${sp.title}</h1>
-        <p class="lead">${sp.lead} ${PH}</p>
+        <p class="lead">${sp.lead}</p>
         <dl class="service__facts">
           <div><dt>Цена</dt><dd>${rub(s.price)}</dd></div>
-          <div><dt>Время</dt><dd>${s.duration} мин ${PH}</dd></div>
+          <div><dt>Время</dt><dd>${s.duration} мин</dd></div>
         </dl>
         <button class="btn btn--primary btn--large" type="button" data-book data-book-service="${s.id}">Записаться на «${sp.title}»</button>
         ${related.length ? `<ul class="service__related">${related.map((r) => `<li><span>${r.name}</span><span>${rub(r.price)}</span></li>`).join('')}</ul>` : ''}
@@ -423,13 +423,7 @@ export function articlePage(slug) {
   <section class="sheet page-body"><article class="article container">
     <figure class="article__media">${img(p.image, { alt: altFor(p.image), sizes: '(min-width: 900px) 760px, 100vw', eager: true })}</figure>
     <div class="prose">
-      <p>${PH} Здесь будет текст статьи. Шаблон поддерживает подзаголовки, списки и цитаты.</p>
-      <h2>Подзаголовок раздела</h2>
-      <p>${PH} Абзац текста статьи длиной 3–5 предложений. Пишите коротко и по делу: один абзац — одна мысль.</p>
-      <ul><li>Пункт списка</li><li>Ещё один пункт</li><li>Третий пункт</li></ul>
-      <blockquote><p>${PH} Совет барбера или цитата клиента.</p></blockquote>
-      <h2>Ещё один раздел</h2>
-      <p>${PH} Заключение и приглашение записаться.</p>
+      ${p.body}
     </div>
     <aside class="cta-inline">
       <p>Хотите подобрать форму вместе с мастером?</p>
