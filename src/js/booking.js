@@ -189,8 +189,11 @@ export function initBooking() {
     st[field] = b.dataset.v;
     if (field === 'master') { st.date = null; st.time = null; }
     if (field === 'date') st.time = null;
-    render();
-    btnNext.focus();
+    // Обновляем выбор на месте, без перерисовки: лента мастеров и списки не сбрасывают прокрутку
+    body.querySelectorAll('.opt').forEach((o) => o.setAttribute('aria-pressed', String(o === b)));
+    btnNext.disabled = !canNext();
+    renderSummary();
+    btnNext.focus({ preventScroll: true });
   });
 
   btnNext.addEventListener('click', () => {
