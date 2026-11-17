@@ -53,8 +53,15 @@ export function initBooking() {
   const masterName = (id) => (id === 'any' ? 'Любой мастер' : masters.find((m) => m.id === id)?.name);
   let st;
   let step;
+  let cal;
+  const MONTHS_AHEAD = 2;
 
-  const reset = () => { st = { service: null, master: null, date: null, time: null, name: '', phone: '', consent: false, promo: '' }; step = 0; };
+  const reset = () => {
+    st = { service: null, master: null, date: null, time: null, name: '', phone: '', consent: false, promo: '' };
+    step = 0;
+    const now = new Date();
+    cal = { y: now.getFullYear(), m: now.getMonth() };
+  };
   const canNext = () => [st.service, st.master, st.date, st.time, st.name.trim().length > 1 && phoneValid(st.phone) && st.consent][step];
 
   function renderSummary() {
@@ -79,16 +86,51 @@ export function initBooking() {
     if (step === 0) {
       body.innerHTML = '<h3>Выберите услугу</h3>' + priceList.map((c) => `<div class="opt-group"><h4>${c.category}</h4><div class="opts">${c.items.map((s) => opt(s.id, `<span>${s.name}</span><small>${rub(s.price)} · ${s.duration} мин</small>`, st.service === s.id)).join('')}</div></div>`).join('');
     } else if (step === 1) {
-      body.innerHTML = '<h3>Выберите мастера</h3><div class="opts">'
-        + opt('any', '<span>Любой свободный мастер</span><small>больше свободного времени</small>', st.master === 'any')
-        + masters.map((m) => opt(m.id, `<span>${m.name}</span><small>${m.role}</small>`, st.master === m.id)).join('') + '</div>';
+      const B = import.meta.env.BASE_URL;
+      const card = (id, photo, name, sub, meta, about) => `<button type="button" class="opt mcard" data-v="${id}" aria-pressed="${st.master === id}">
+          <span class="mcard__photo">${photo}</span>
+          <span class="mcard__body">
+            <span class="mcard__name">${name}</span>
+            <span class="mcard__spec">${sub}</span>
+            ${meta ? `<span class="mcard__meta">${meta}</span>` : ''}
+            ${about ? `<span class="mcard__about">${about}</span>` : ''}
+          </span>
+        </button>`;
+      const markImg = `<img src="${B}img/logo-mark-96.webp" alt="" class="mcard__mark">`;
+      body.innerHTML = '<h3>Выберите мастера</h3><div class="mcards">'
+        + card('any', markImg, 'Любой мастер', 'Подберём свободного', '', 'Больше вариантов по времени')
+        + masters.map((m) => card(m.id,
+          m.photo ? `<img src="${B}img/${m.photo}-480.webp" alt="" loading="lazy">` : markImg,
+          m.name, m.spec,
+          `<span>★ ${m.rating}</span><span>Опыт ${m.experience}</span>`, m.about)).join('') + '</div>';
     } else if (step === 2) {
-      const days = Array.from({ length: 14 }, (_, i) => { const d = new Date(); d.setDate(d.getDate() + i); return d; });
-      body.innerHTML = '<h3>Выберите дату</h3><div class="opts opts--grid">' + days.map((d) => {
-        const v = isoDate(d);
-        const free = slotsFor(v, st.master).some((s) => s.free);
-        return opt(v, `<small>${d.toLocaleDateString('ru-RU', { weekday: 'short' })}</small><span>${d.getDate()} ${d.toLocaleDateString('ru-RU', { month: 'short' })}</span>`, st.date === v, !free);
-      }).join('') + '</div>';
+      const today = new Date(); today.setHours(0, 0, 0, 0);
+      const first = new Date(cal.y, cal.m, 1);
+      const daysIn = new Date(cal.y, cal.m + 1, 0).getDate();
+      const lead = (first.getDay() + 6) % 7;
+      const minM = today.getFullYear() * 12 + today.getMonth();
+      const curM = cal.y * 12 + cal.m;
+      const title = first.toLocaleDateString('ru-RU', { month: 'long', year: 'numeric' }).replace(' г.', '');
+      const cells = [];
+      for (let i = 0; i < lead; i++) cells.push('<span class="cal__empty" aria-hidden="true"></span>');
+      for (let d = 1; d <= daysIn; d++) {
+        const date = new Date(cal.y, cal.m, d);
+        const v = isoDate(date);
+        const past = date < today;
+        const free = !past && slotsFor(v, st.master).some((s) => s.free);
+        const label = date.toLocaleDateString('ru-RU', { weekday: 'long', day: 'numeric', month: 'long' });
+        cells.push(`<button type="button" class="opt cal__day${date.getTime() === today.getTime() ? ' is-today' : ''}" data-v="${v}" aria-pressed="${st.date === v}" aria-label="${label}" ${free ? '' : 'disabled'}>${d}</button>`);
+      }
+      body.innerHTML = `<h3>Выберите дату</h3>
+        <div class="cal">
+          <div class="cal__head">
+            <button type="button" class="cal__nav" data-cal="-1" aria-label="Предыдущий месяц" ${curM <= minM ? 'disabled' : ''}>‹</button>
+            <span class="cal__title">${title[0].toUpperCase() + title.slice(1)}</span>
+            <button type="button" class="cal__nav" data-cal="1" aria-label="Следующий месяц" ${curM >= minM + MONTHS_AHEAD ? 'disabled' : ''}>›</button>
+          </div>
+          <div class="cal__week" aria-hidden="true"><span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Вс</span></div>
+          <div class="cal__grid">${cells.join('')}</div>
+        </div>`;
     } else if (step === 3) {
       body.innerHTML = `<h3>Свободное время, ${fmtDate(st.date)}</h3><div class="opts opts--grid">`
         + slotsFor(st.date, st.master).map((s) => opt(s.t, `<span>${s.t}</span>`, st.time === s.t, !s.free)).join('') + '</div>';
@@ -125,6 +167,14 @@ export function initBooking() {
   }
 
   body.addEventListener('click', (e) => {
+    const nav = e.target.closest('[data-cal]');
+    if (nav && !nav.disabled) {
+      const d = new Date(cal.y, cal.m + Number(nav.dataset.cal), 1);
+      cal = { y: d.getFullYear(), m: d.getMonth() };
+      render();
+      body.querySelector(`[data-cal="${nav.dataset.cal}"]`)?.focus();
+      return;
+    }
     const b = e.target.closest('.opt');
     if (!b || b.disabled) return;
     const field = ['service', 'master', 'date', 'time'][step];

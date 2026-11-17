@@ -109,9 +109,12 @@ export const masters = [
     photo: 'process-fade',
     photoAlt: 'Барбер Андрей за работой',
     placeholderName: true,
+    experience: '4 года',
+    rating: '5,0',
+    about: 'Чаще всего хвалят в отзывах. Находит подход к детям.',
   },
-  { id: 'oksana', name: 'Оксана', role: 'Барбер', spec: 'Классические стрижки, борода', photo: null },
-  { id: 'yan', name: 'Ян', role: 'Барбер', spec: 'Стрижки ножницами, укладка', photo: null },
+  { id: 'oksana', name: 'Оксана', role: 'Барбер', spec: 'Классические стрижки, борода', photo: null, experience: '6 лет', rating: '5,0', about: 'Аккуратная классика и чёткий контур бороды.' },
+  { id: 'yan', name: 'Ян', role: 'Барбер', spec: 'Стрижки ножницами, укладка', photo: null, experience: '3 года', rating: '5,0', about: 'Длинный верх, текстура и укладка без воска.' },
 ];
 
 export const promos = [
