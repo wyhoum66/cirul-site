@@ -1,0 +1,4 @@
+node_modules/
+dist/
+.claude/
+src/assets/src-photos/
