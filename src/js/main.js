@@ -56,3 +56,8 @@ if (lb && items.length) {
 
 initBooking();
 initForms();
+
+const header = document.querySelector('[data-header]');
+const onScroll = () => header?.classList.toggle('is-scrolled', scrollY > 40);
+addEventListener('scroll', onScroll, { passive: true });
+onScroll();

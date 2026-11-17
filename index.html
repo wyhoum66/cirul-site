@@ -5,94 +5,95 @@
 <!--@header-->
 <main id="main">
 <section class="hero">
-  <div class="container hero__grid">
-    <div class="hero__text">
-      <img class="hero__logo" src="/img/logo-320.webp" width="320" height="320" alt="ЦИРЮЛ" fetchpriority="high">
-      <h1>Премиальный барбершоп с точной мужской подачей</h1>
-      <p class="hero__sub">Барбершоп ЦИРЮЛ в Самаре на Гагарина, 42 — в двух минутах от метро «Гагаринская». Стрижки, борода и опасное бритьё без суеты.</p>
-      <div class="hero__actions">
-        <button class="btn btn--primary btn--large" type="button" data-book>Записаться онлайн</button>
-        <a class="btn btn--ghost btn--large" href="{{B}}uslugi/">Услуги и цены</a>
-      </div>
-      <ul class="hero__facts">
-        <li><strong>5,0</strong> на 2ГИС, 32 оценки</li>
-        <li><strong>09:00–21:00</strong> ежедневно</li>
-        <li>Стрижка от <strong>1 700 ₽</strong></li>
-      </ul>
-    </div>
-    <div class="mirror">
-      <div class="mirror__frame">
-        <video autoplay muted loop playsinline preload="metadata" poster="/video/poster.webp" aria-hidden="true">
-          <source src="/video/hero.webm" type="video/webm">
-          <source src="/video/hero.mp4" type="video/mp4">
-        </video>
-      </div>
+  <div class="hero__bg" aria-hidden="true"><!--@img interior-hall-wide {"alt":"","sizes":"100vw","eager":true}--></div>
+  <!--@decor-->
+  <div class="hero__inner">
+    <img class="hero__mark" src="/img/logo-mark-240.webp" width="157" height="240" alt="" fetchpriority="high">
+    <h1 class="hero__title">ЦИРЮЛ</h1>
+    <p class="hero__slogan">Премиальный барбершоп с точной мужской подачей</p>
+    <div class="hero__actions">
+      <button class="btn btn--primary btn--pill btn--large" type="button" data-book>Онлайн-запись</button>
+      <a class="btn btn--ghost btn--pill btn--large" href="{{B}}uslugi/">Услуги и цены</a>
     </div>
   </div>
+  <span class="hero__scroll" aria-hidden="true"></span>
+  <ul class="hero__facts">
+    <li>Самара, <strong>ул. Гагарина, 42</strong></li>
+    <li><strong>5,0</strong> на 2ГИС</li>
+    <li>Ежедневно <strong>09:00–21:00</strong></li>
+  </ul>
 </section>
 
-<section class="section">
+<section class="section sheet">
+  <!--@decor:soft-->
   <div class="container intro">
-    <div>
+    <div class="reveal">
+      <p class="eyebrow">О барбершопе</p>
       <h2>Форма, качество и ваше время</h2>
       <p class="lead">Три кресла, спокойный зал и мастера, которые сначала слушают, а потом берут машинку. Подбираем форму под тип лица и показываем, как укладывать дома.</p>
       <ul class="facts-grid">
         <li><strong>Гарантия</strong><span>Поправим стрижку бесплатно, если что-то не так</span></li>
         <li><strong>2 минуты</strong><span>пешком от м. Гагаринская</span></li>
-        <li><strong>Кофе и Wi-Fi</strong><span>пока ждёте или пока стрижётся сын</span></li>
+        <li><strong>Кофе и Wi-Fi</strong><span>пока ждёте своей очереди</span></li>
         <li><strong>Парковка</strong><span>15 мест рядом с входом</span></li>
       </ul>
       <p style="margin-top:28px"><a class="link" href="{{B}}o-nas/">Подробнее о барбершопе</a></p>
     </div>
-    <div class="intro__media panel reveal"><!--@img interior-hall {"alt":"Зал барбершопа: три кресла у зеркал и синие стены","sizes":"(min-width: 900px) 45vw, 100vw"}--></div>
+    <div class="intro__media reveal"><!--@img interior-hall {"alt":"Зал барбершопа: три кресла у зеркал и синие стены","sizes":"(min-width: 900px) 45vw, 100vw"}--></div>
   </div>
 </section>
 
-<section class="section section--alt">
+<section class="section dark">
+  <!--@decor-->
   <div class="container">
-    <div class="section__head"><h2>Популярные услуги</h2><a class="link" href="{{B}}uslugi/">Весь прайс</a></div>
+    <div class="section__head"><div><p class="eyebrow">Услуги</p><h2>Популярные услуги</h2></div><a class="link" href="{{B}}uslugi/">Весь прайс</a></div>
     <!--@block:service-cards-->
   </div>
 </section>
 
-<section class="section">
+<section class="section sheet">
+  <!--@decor:soft-->
   <div class="container">
-    <div class="section__head"><h2>Акции</h2><a class="link" href="{{B}}akcii/">Все акции</a></div>
+    <div class="section__head"><div><p class="eyebrow">Выгодно</p><h2>Акции</h2></div><a class="link" href="{{B}}akcii/">Все акции</a></div>
     <!--@block:promos:3-->
   </div>
 </section>
 
-<section class="section section--dark">
+<section class="section dark">
+  <!--@decor-->
   <div class="container">
-    <div class="section__head"><h2>Работы мастеров</h2><a class="link" href="{{B}}galereya/">Галерея</a></div>
+    <div class="section__head"><div><p class="eyebrow">Портфолио</p><h2>Работы мастеров</h2></div><a class="link" href="{{B}}galereya/">Вся галерея</a></div>
     <!--@block:works-4-->
   </div>
 </section>
 
-<section class="section">
+<section class="section sheet" style="padding-top:clamp(112px,12vw,190px)">
+  <!--@decor:soft-->
   <div class="container">
-    <div class="section__head"><h2>Мастера</h2><a class="link" href="{{B}}mastera/">Все мастера</a></div>
+    <div class="section__head"><div><p class="eyebrow">Команда</p><h2>Мастера</h2></div><a class="link" href="{{B}}mastera/">Все мастера</a></div>
     <!--@block:masters-->
   </div>
 </section>
 
-<section class="section section--alt">
+<section class="section dark">
+  <!--@decor-->
   <div class="container">
-    <div class="section__head"><h2>Отзывы</h2><p class="rating"><strong>5,0</strong><span>32 оценки на 2ГИС</span></p></div>
-    <!--@block:reviews-->
+    <div class="section__head"><div><p class="eyebrow">Отзывы</p><h2>Что говорят гости</h2></div><p class="rating"><strong>5,0</strong><span>32 оценки на 2ГИС</span></p></div>
+    <div class="sheet-cards"><!--@block:reviews--></div>
   </div>
 </section>
 
-<section class="cta">
-  <div class="cta__bg" aria-hidden="true"><!--@img interior-lights {"alt":"","sizes":"100vw"}--></div>
-  <div class="container">
-    <div class="cta__box panel">
-      <h2>Запишитесь на удобное время</h2>
-      <p>Онлайн за минуту или по телефону <a href="<!--@phoneHref-->" data-goal="click_phone"><!--@phone--></a>. Ежедневно с 9:00 до 21:00.</p>
-      <div class="cta__actions">
-        <button class="btn btn--primary btn--large" type="button" data-book>Записаться онлайн</button>
-        <a class="btn btn--ghost btn--large" href="<!--@phoneHref-->" data-goal="click_phone">Позвонить</a>
-      </div>
+<section class="section sheet consult">
+  <!--@decor:soft-->
+  <div class="container reveal">
+    <p class="eyebrow">Консультация в один клик</p>
+    <h2>Есть вопросы по стрижке или времени?</h2>
+    <p class="lead">Напишите нам в Telegram, MAX или VK. Барбер подскажет онлайн: присылайте фото желаемой стрижки, уточняйте детали визита и стоимость прямо в чате.</p>
+    <div class="consult__actions">
+      <button class="btn btn--primary" type="button" data-book>Записаться</button>
+      <a class="btn btn--navy" href="https://t.me/ciryulbarber" target="_blank" rel="noopener" data-goal="click_social" data-social="tg">Telegram</a>
+      <a class="btn btn--navy" href="https://max.ru/u/f9LHodD0cOLYob6qA-fYtjVcopK_as0T0wX5w3yzU975kggC2d3eALhbIdQ" target="_blank" rel="noopener" data-goal="click_social" data-social="max">MAX</a>
+      <a class="btn btn--navy" href="https://vk.ru/id1121274447" target="_blank" rel="noopener" data-goal="click_social" data-social="vk">VK</a>
     </div>
   </div>
 </section>

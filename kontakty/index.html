@@ -4,25 +4,27 @@
 <body>
 <!--@header-->
 <main id="main">
-<section class="page-hero container">
+<section class="page-hero"><!--@decor--><div class="container">
   <!--@crumbs-->
   <h1>Контакты</h1>
-</section>
-<section class="container" style="padding-bottom:clamp(64px,9vw,140px)">
-  <div class="split">
+  <p class="lead">Самара, ул. Гагарина, 42 · ежедневно 09:00–21:00</p>
+</div></section>
+<section class="sheet page-body"><div class="container">
+<div class="split">
+  <div>
+    <!--@block:contacts-->
+    <p style="margin-top:28px"><button class="btn btn--primary btn--large" type="button" data-book>Записаться онлайн</button></p>
+  </div>
+  <div class="map">
     <div>
-      <!--@block:contacts-->
-      <p style="margin-top:28px"><button class="btn btn--primary btn--large" type="button" data-book>Записаться онлайн</button></p>
-    </div>
-    <div class="map panel">
-      <div>
-        <p>Здесь будет интерактивная карта <!--@ph--></p>
-        <p>Самара, ул. Гагарина, 42 · 53.200615, 50.179068</p>
-        <a class="btn btn--ghost" href="https://yandex.ru/maps/?pt=50.179068,53.200615&amp;z=17&amp;l=map" target="_blank" rel="noopener">Открыть в Яндекс Картах</a>
-      </div>
+      <div class="map__pin"></div>
+      <p>Здесь будет интерактивная карта <!--@ph--></p>
+      <p>Самара, ул. Гагарина, 42 · 53.200615, 50.179068</p>
+      <a class="btn btn--ghost btn--pill" href="https://yandex.ru/maps/?pt=50.179068,53.200615&amp;z=17&amp;l=map" target="_blank" rel="noopener">Открыть в Яндекс Картах</a>
     </div>
   </div>
-</section>
+</div>
+</div></section>
 </main>
 <!--@footer-->
 </body>

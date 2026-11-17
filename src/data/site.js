@@ -137,13 +137,6 @@ export const promos = [
     service: 'haircut',
   },
   {
-    id: 'certificate',
-    title: 'Подарочный сертификат',
-    text: 'Подарите визит в ЦИРЮЛ: номинал или конкретная услуга.',
-    terms: 'Действует 6 месяцев. [ЗАГЛУШКА]',
-    link: 'sertifikat/',
-  },
-  {
     id: 'friend',
     title: 'Приведи друга',
     text: 'Другу −20% на первый визит, вам −300 ₽ на следующую стрижку.',
@@ -201,6 +194,7 @@ export const navMain = [
   { href: 'mastera/', label: 'Мастера' },
   { href: 'o-nas/', label: 'О нас' },
   { href: 'galereya/', label: 'Галерея' },
+  { href: 'sertifikat/', label: 'Сертификат' },
   { href: 'kontakty/', label: 'Контакты' },
 ];
 

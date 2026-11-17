@@ -138,7 +138,7 @@ export function head(route) {
   <link rel="apple-touch-icon" href="/favicon-180.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Manrope:wght@400;500;600&display=swap&subset=cyrillic">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap">
   <link rel="stylesheet" href="/src/styles/main.css">
   <script type="module" src="/src/js/main.js"></script>
   ${schemas.map(ld).join('\n  ')}`;
@@ -153,14 +153,19 @@ export function header(route) {
   return `<a class="skip" href="#main">К содержанию</a>
 <header class="site-header" data-header>
   <div class="container site-header__row">
-    <a class="brand" href="{{B}}" aria-label="ЦИРЮЛ — на главную"><img src="/img/logo-160.webp" width="64" height="64" alt="ЦИРЮЛ"></a>
+    ${brand()}
     <nav class="nav" id="site-nav" aria-label="Основное меню">
       <ul class="nav__list">${nav}</ul>
-      <a class="nav__phone" href="${C.phoneHref}" data-goal="click_phone">${C.phone}</a>
+      <div class="nav__extra">
+        <a class="nav__phone" href="${C.phoneHref}" data-goal="click_phone">${C.phone}</a>
+        ${iconLinks()}
+      </div>
     </nav>
-    <a class="header-phone" href="${C.phoneHref}" data-goal="click_phone">${C.phone}</a>
-    <button class="btn btn--primary header-cta" type="button" data-book>Записаться</button>
-    <button class="burger" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Открыть меню" data-burger><span></span><span></span></button>
+    <div class="header-right">
+      ${iconLinks()}
+      <button class="btn btn--primary btn--pill header-cta" type="button" data-book>Записаться</button>
+      <button class="burger" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Открыть меню" data-burger><span></span><span></span></button>
+    </div>
   </div>
 </header>`;
 }
@@ -173,15 +178,24 @@ export function breadcrumbs(route) {
   return `<nav class="crumbs" aria-label="Хлебные крошки">${parts.join('<span class="crumbs__sep" aria-hidden="true">/</span>')}</nav>`;
 }
 
+const ICONS = {
+  vk: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.8 17.5c-5.6 0-8.9-3.9-9-10.4h2.8c.1 4.8 2.3 6.8 4 7.2V7.1h2.7v4.1c1.6-.2 3.3-2 3.9-4.1h2.6c-.4 2.5-2.3 4.3-3.6 5.1 1.3.6 3.4 2.3 4.2 5.3h-2.9c-.6-2-2.2-3.5-4.2-3.7v3.7h-.5z"/></svg>',
+  tg: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.4 4.3 2.9 11.5c-1.3.5-1.2 1.2-.2 1.5l4.7 1.5 1.8 5.6c.2.6.4.8.8.8.4 0 .6-.2.9-.4l2.3-2.2 4.7 3.5c.9.5 1.5.2 1.7-.8l3.1-14.6c.3-1.3-.5-1.8-1.3-1.5zM8.6 14.2l9.2-5.8c.4-.3.8-.1.5.2l-7.6 6.9-.3 3.2-1.8-4.5z"/></svg>',
+  max: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5a9.5 9.5 0 0 0-8.3 14.1L2.6 21l4.6-1.1A9.5 9.5 0 1 0 12 2.5zm4.4 12.9h-1.9v-4.2l-2.5 3.2-2.5-3.2v4.2H7.6V8.6h1.7l2.7 3.6 2.7-3.6h1.7v6.8z"/></svg>',
+};
+const iconLinks = () => `<ul class="icons">${C.socials.map((s) => `<li><a href="${s.url}" target="_blank" rel="noopener" aria-label="${s.label}" data-goal="click_social" data-social="${s.id}">${ICONS[s.id]}</a></li>`).join('')}</ul>`;
+const brand = () => `<a class="brand" href="{{B}}" aria-label="ЦИРЮЛ — на главную"><img src="/img/logo-mark-96.webp" width="63" height="96" alt=""><span>ЦИРЮЛ</span></a>`;
+export const decor = (variant = 'full') => `<div class="decor" aria-hidden="true"><span class="blob blob--a"></span><span class="blob blob--b"></span>${variant === 'full' ? '<span class="beam beam--1"></span><span class="beam beam--2"></span><span class="frame frame--1"></span><span class="frame frame--2"></span>' : ''}<span class="grain"></span></div>`;
+
 const socialLinks = (cls = 'socials') => `<ul class="${cls}">${C.socials.map((s) => `<li><a href="${s.url}" target="_blank" rel="noopener" data-goal="click_social" data-social="${s.id}">${s.label}</a></li>`).join('')}</ul>`;
 
 export function footer() {
   const cols = site.navFooter.map((col) => `<ul>${col.map((n) => `<li><a href="{{B}}${n.href}">${n.label}</a></li>`).join('')}</ul>`).join('');
   return `<footer class="site-footer">
-  <div class="lamp" aria-hidden="true"></div>
+  ${decor('soft')}
   <div class="container site-footer__grid">
     <div class="site-footer__brand">
-      <img src="/img/logo-320.webp" width="140" height="140" alt="ЦИРЮЛ" loading="lazy">
+      ${brand()}
       <p>${C.slogan}</p>
     </div>
     <nav class="site-footer__nav" aria-label="Разделы сайта">${cols}</nav>
@@ -189,7 +203,7 @@ export function footer() {
       <a class="site-footer__phone" href="${C.phoneHref}" data-goal="click_phone">${C.phone}</a>
       <p>${C.addressFull}<br>${C.metro}</p>
       <p>${C.hoursText}</p>
-      ${socialLinks()}
+      ${iconLinks()}
     </div>
   </div>
   <div class="container site-footer__legal">
@@ -197,7 +211,7 @@ export function footer() {
     <p>Демо-версия сайта. Запись и формы не отправляют данные.</p>
   </div>
 </footer>
-<div class="mobile-cta"><button class="btn btn--primary" type="button" data-book>Записаться онлайн</button></div>
+<div class="mobile-cta"><button class="btn btn--primary btn--pill" type="button" data-book>Записаться онлайн</button></div>
 ${bookingModal()}
 
 ${lightbox()}`;
@@ -277,16 +291,16 @@ const blocks = {
 
   promos: (limit) => {
     const list = limit ? site.promos.slice(0, Number(limit)) : site.promos;
-    return `<ul class="cards cards--promos">${list.map((p) => `<li class="promo panel reveal" id="${p.id}">
+    return `<ul class="cards cards--promos">${list.map((p) => `<li class="promo reveal" id="${p.id}">
       <h3>${p.title}</h3>
       <p>${p.text}</p>
       <p class="promo__terms">${p.terms.replace('[ЗАГЛУШКА]', PH)}</p>
-      ${p.link ? `<a class="btn btn--ghost btn--small" href="{{B}}${p.link}">Выбрать сертификат</a>` : `<button class="btn btn--ghost btn--small" type="button" data-book data-book-service="${p.service}" data-book-promo="${esc(p.title)}">Записаться по акции</button>`}
+      ${p.link ? `<a class="btn btn--ghost btn--small" href="{{B}}${p.link}">Выбрать сертификат</a>` : `<button class="btn btn--primary btn--small" type="button" data-book data-book-service="${p.service}" data-book-promo="${esc(p.title)}">Записаться по акции</button>`}
     </li>`).join('')}</ul>`;
   },
 
   masters: () => `<ul class="cards cards--masters">${site.masters.map((m) => `<li class="master reveal">
-      <div class="master__photo">${m.photo ? img(m.photo, { alt: m.photoAlt, sizes: '(min-width: 1000px) 30vw, 90vw' }) : `<div class="master__ph"><img src="/img/logo-320.webp" width="160" height="160" alt="" loading="lazy"><span>Фото мастера ${PH}</span></div>`}</div>
+      <div class="master__photo">${m.photo ? img(m.photo, { alt: m.photoAlt, sizes: '(min-width: 1000px) 30vw, 90vw' }) : `<div class="master__ph"><img src="/img/logo-mark-240.webp" width="157" height="240" alt="" loading="lazy"><span>Фото мастера ${PH}</span></div>`}</div>
       <h3>${m.name}${m.placeholderName ? ` <span class="ph">[проверить имя]</span>` : ''}</h3>
       <p class="master__spec">${m.spec} ${PH}</p>
       <button class="btn btn--ghost btn--small" type="button" data-book data-book-master="${m.id}">Записаться к мастеру</button>
@@ -368,7 +382,7 @@ export function servicePage(slug) {
   const s = site.serviceById(sp.serviceId);
   const related = site.priceList.flatMap((c) => c.items).filter((i) =>
     (slug === 'oformlenie-borody' && i.id === 'beard-premium') || (slug === 'strizhka-boroda' && i.id === 'combo-premium') || (slug === 'muzhskaya-strizhka' && ['first-haircut', 'kids'].includes(i.id)));
-  return `<section class="page-hero container">
+  return `<section class="page-hero">${decor()}<div class="container">
     ${breadcrumbs(`/${slug}/`)}
     <div class="service">
       <div class="service__text">
@@ -381,10 +395,10 @@ export function servicePage(slug) {
         <button class="btn btn--primary btn--large" type="button" data-book data-book-service="${s.id}">Записаться на «${sp.title}»</button>
         ${related.length ? `<ul class="service__related">${related.map((r) => `<li><span>${r.name}</span><span>${rub(r.price)}</span></li>`).join('')}</ul>` : ''}
       </div>
-      <figure class="service__media panel">${img(sp.image, { alt: sp.imageAlt, sizes: '(min-width: 1000px) 45vw, 100vw', eager: true })}</figure>
+      <figure class="service__media">${img(sp.image, { alt: sp.imageAlt, sizes: '(min-width: 1000px) 45vw, 100vw', eager: true })}</figure>
     </div>
-  </section>
-  <section class="section container">
+  </div></section>
+  <section class="section sheet"><div class="container">
     <div class="split">
       <div>
         <h2>Что входит</h2>
@@ -392,19 +406,21 @@ export function servicePage(slug) {
       </div>
       <ul class="duo">${sp.gallery.map((g) => `<li class="reveal">${img(g, { alt: altFor(g), sizes: '(min-width: 1000px) 25vw, 50vw' })}</li>`).join('')}</ul>
     </div>
-  </section>
-  <section class="section section--alt"><div class="container"><h2>Другие услуги</h2>${blocks['service-cards']()}</div></section>`;
+  </div></section>
+  <section class="section dark">${decor()}<div class="container"><h2>Другие услуги</h2>${blocks['service-cards']()}</div></section>`;
 }
 
 export function articlePage(slug) {
   const p = site.blogPosts.find((x) => x.slug === slug);
-  return `<article class="article container">
+  return `<section class="page-hero">${decor()}<div class="container">
     ${breadcrumbs(`/blog/${slug}/`)}
     <header class="article__head">
       <p class="post__date"><time datetime="${p.date}">${new Date(p.date).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' })}</time></p>
       <h1>${p.title}</h1>
       <p class="lead">${p.excerpt}</p>
     </header>
+  </div></section>
+  <section class="sheet page-body"><article class="article container">
     <figure class="article__media">${img(p.image, { alt: altFor(p.image), sizes: '(min-width: 900px) 760px, 100vw', eager: true })}</figure>
     <div class="prose">
       <p>${PH} Здесь будет текст статьи. Шаблон поддерживает подзаголовки, списки и цитаты.</p>
@@ -415,12 +431,12 @@ export function articlePage(slug) {
       <h2>Ещё один раздел</h2>
       <p>${PH} Заключение и приглашение записаться.</p>
     </div>
-    <aside class="cta-inline panel">
+    <aside class="cta-inline">
       <p>Хотите подобрать форму вместе с мастером?</p>
       <button class="btn btn--primary" type="button" data-book>Записаться</button>
     </aside>
     <p><a class="link" href="{{B}}blog/">Все статьи</a></p>
-  </article>`;
+  </article></section>`;
 }
 
 /* ---------- рендер ---------- */
@@ -430,6 +446,8 @@ export function render(html, route, base) {
     .replace('<!--@header-->', () => header(route))
     .replace('<!--@footer-->', () => footer())
     .replace('<!--@crumbs-->', () => breadcrumbs(route))
+    .replace(/<!--@decor(?::(\w+))?-->/g, (_, v) => decor(v))
+    .replace('<body>', route === '/' ? '<body class="home">' : '<body>')
     .replace(/<!--@service:([\w-]+)-->/g, (_, s) => servicePage(s))
     .replace(/<!--@article:([\w-]+)-->/g, (_, s) => articlePage(s))
     .replace(/<!--@block:([\w-]+)(?::([\w-]+))?-->/g, (_, b, arg) => {

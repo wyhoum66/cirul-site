@@ -4,37 +4,37 @@
 <body>
 <!--@header-->
 <main id="main">
-<section class="page-hero container">
+<section class="page-hero"><!--@decor--><div class="container">
   <!--@crumbs-->
   <h1>Вакансии</h1>
   <p class="lead">Ищем людей, которым важна аккуратность. <!--@ph--></p>
-</section>
-<section class="container" style="padding-bottom:clamp(64px,9vw,140px)">
-  <div class="split">
-    <div class="cards">
-      <article class="vacancy panel">
-        <h2>Барбер</h2>
-        <p class="muted">Опыт от 1 года · сменный график · процент + оклад <!--@ph--></p>
-        <ul><li>Уверенные фейды и стрижки ножницами</li><li>Работа с бородой и опасной бритвой</li><li>Портфолио работ</li></ul>
-      </article>
-      <article class="vacancy panel">
-        <h2>Администратор</h2>
-        <p class="muted">2/2 · 09:00–21:00 · оклад <!--@ph--></p>
-        <ul><li>Запись клиентов и звонки</li><li>Касса и порядок в зале</li><li>Вежливость без навязчивости</li></ul>
-      </article>
-    </div>
-    <form class="form" data-fake="vacancies" data-goal="vacancy_request" data-ok-title="Отклик отправлен" data-ok-text="Мы свяжемся с вами в течение двух рабочих дней. Это демо: данные никуда не отправлены." novalidate>
-      <h2>Откликнуться</h2>
-      <div class="field"><label for="v-pos">Вакансия</label><select id="v-pos" name="position" required><option value="Барбер">Барбер</option><option value="Администратор">Администратор</option></select></div>
-      <div class="field"><label for="v-name">Имя</label><input id="v-name" name="name" required autocomplete="name"></div>
-      <div class="field"><label for="v-phone">Телефон</label><input id="v-phone" name="phone" type="tel" inputmode="tel" required autocomplete="tel" placeholder="+7 (___) ___-__-__"></div>
-      <div class="field"><label for="v-about">Опыт и ссылка на портфолио</label><textarea id="v-about" name="about"></textarea></div>
-      <!--@block:consent:v-consent-->
-      <p class="form-err" role="alert"></p>
-      <button class="btn btn--primary btn--large" type="submit">Отправить отклик</button>
-    </form>
+</div></section>
+<section class="sheet page-body"><div class="container">
+<div class="split">
+  <div class="cards">
+    <article class="vacancy">
+      <h2>Барбер</h2>
+      <p class="muted">Опыт от 1 года · сменный график · процент + оклад <!--@ph--></p>
+      <ul><li>Уверенные фейды и стрижки ножницами</li><li>Работа с бородой и опасной бритвой</li><li>Портфолио работ</li></ul>
+    </article>
+    <article class="vacancy">
+      <h2>Администратор</h2>
+      <p class="muted">2/2 · 09:00–21:00 · оклад <!--@ph--></p>
+      <ul><li>Запись клиентов и звонки</li><li>Касса и порядок в зале</li><li>Вежливость без навязчивости</li></ul>
+    </article>
   </div>
-</section>
+  <form class="form form-card" data-fake="vacancies" data-goal="vacancy_request" data-ok-title="Отклик отправлен" data-ok-text="Мы свяжемся с вами в течение двух рабочих дней. Это демо: данные никуда не отправлены." novalidate>
+    <h2>Откликнуться</h2>
+    <div class="field"><label for="v-pos">Вакансия</label><select id="v-pos" name="position" required><option value="Барбер">Барбер</option><option value="Администратор">Администратор</option></select></div>
+    <div class="field"><label for="v-name">Имя</label><input id="v-name" name="name" required autocomplete="name"></div>
+    <div class="field"><label for="v-phone">Телефон</label><input id="v-phone" name="phone" type="tel" inputmode="tel" required autocomplete="tel" placeholder="+7 (___) ___-__-__"></div>
+    <div class="field"><label for="v-about">Опыт и ссылка на портфолио</label><textarea id="v-about" name="about"></textarea></div>
+    <!--@block:consent:v-consent-->
+    <p class="form-err" role="alert"></p>
+    <button class="btn btn--primary btn--large" type="submit">Отправить отклик</button>
+  </form>
+</div>
+</div></section>
 </main>
 <!--@footer-->
 </body>

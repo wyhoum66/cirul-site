@@ -4,23 +4,36 @@
 <body>
 <!--@header-->
 <main id="main">
-<section class="page-hero container">
+<section class="page-hero"><!--@decor--><div class="container">
   <!--@crumbs-->
   <div class="split">
     <div>
       <h1>Подарочный сертификат</h1>
       <p class="lead">Сертификат на сумму или на конкретную услугу. Действует 6 месяцев <!--@ph-->.</p>
-      <div class="cert panel" aria-label="Макет сертификата">
-        <img src="/img/logo-320.webp" width="200" height="200" alt="ЦИРЮЛ" loading="lazy">
-        <div>
-          <p class="cert__title">Подарочный сертификат</p>
-          <p class="muted">барбершоп ЦИРЮЛ, Самара, ул. Гагарина, 42</p>
-          <p class="cert__value" data-cert-value>3 000 ₽</p>
-          <small>№ 0000-0000 · действует до ДД.ММ.ГГГГ <!--@ph--></small>
-        </div>
+    </div>
+    <div class="cert" aria-label="Макет сертификата">
+      <img src="/img/logo-mark-240.webp" width="157" height="240" alt="" loading="lazy">
+      <div>
+        <p class="cert__title">ЦИРЮЛ</p>
+        <p class="muted">Подарочный сертификат · Самара, ул. Гагарина, 42</p>
+        <p class="cert__value" data-cert-value>3 000 ₽</p>
+        <small>№ 0000-0000 · действует до ДД.ММ.ГГГГ <!--@ph--></small>
       </div>
     </div>
-    <form class="form" data-fake="certificates" data-goal="certificate_request" data-ok-title="Заявка отправлена" data-ok-text="Администратор позвонит, чтобы оформить сертификат. Это демо: данные никуда не отправлены." novalidate>
+  </div>
+</div></section>
+<section class="sheet page-body"><div class="container">
+  <div class="split">
+    <div>
+      <h2>Как это работает</h2>
+      <ol class="steps">
+        <li>Выберите номинал и оставьте заявку</li>
+        <li>Администратор перезвонит и уточнит детали</li>
+        <li>Заберите сертификат в барбершопе или получите электронный</li>
+        <li>Получатель записывается на удобное время</li>
+      </ol>
+    </div>
+    <form class="form form-card" data-fake="certificates" data-goal="certificate_request" data-ok-title="Заявка отправлена" data-ok-text="Администратор позвонит, чтобы оформить сертификат. Это демо: данные никуда не отправлены." novalidate>
       <h2>Заявка</h2>
       <fieldset class="field" style="border:0;padding:0;margin:0">
         <legend>Номинал <!--@ph--></legend>
@@ -39,7 +52,7 @@
       <button class="btn btn--primary btn--large" type="submit">Отправить заявку</button>
     </form>
   </div>
-</section>
+</div></section>
 </main>
 <!--@footer-->
 </body>
