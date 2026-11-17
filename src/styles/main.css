@@ -537,3 +537,13 @@ main > section:last-child { padding-bottom: calc(clamp(64px, 8vw, 120px) + var(-
 .mcard__photo { aspect-ratio: 16 / 7; }
 .opt.cal__day { aspect-ratio: auto; height: 44px; }
 @media (max-width: 480px) { .opt.cal__day { height: 40px; } }
+
+/* Карточки мастеров в записи листаются */
+.mhead { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+.mhead h3 { margin: 0; }
+.mhead__nav { display: flex; gap: 8px; }
+.mcards { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain; padding: 4px 4px 14px; margin: -4px -4px 0; scrollbar-width: none; }
+.mcards::-webkit-scrollbar { display: none; }
+.mcards .opt.mcard { flex: 0 0 min(270px, 78%); scroll-snap-align: start; }
+.mcard__photo { aspect-ratio: 4 / 3; }
+@media (max-width: 480px) { .mcards .opt.mcard { flex-basis: 82%; } .mcard__photo { aspect-ratio: 4 / 3; } }

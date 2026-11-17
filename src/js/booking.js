@@ -97,8 +97,9 @@ export function initBooking() {
           </span>
         </button>`;
       const markImg = `<img src="${B}img/logo-mark-96.webp" alt="" class="mcard__mark">`;
-      body.innerHTML = '<h3>Выберите мастера</h3><div class="mcards">'
-        + card('any', markImg, 'Любой мастер', 'Подберём свободного', '', 'Больше вариантов по времени')
+      body.innerHTML = `<div class="mhead"><h3>Выберите мастера</h3>
+          <div class="mhead__nav"><button type="button" class="cal__nav" data-mscroll="-1" aria-label="Предыдущий мастер">‹</button><button type="button" class="cal__nav" data-mscroll="1" aria-label="Следующий мастер">›</button></div></div>
+        <div class="mcards" data-mcards>`
         + masters.map((m) => card(m.id,
           m.photo ? `<img src="${B}img/${m.photo}-480.webp" alt="" loading="lazy">` : markImg,
           m.name, m.spec,
@@ -167,6 +168,13 @@ export function initBooking() {
   }
 
   body.addEventListener('click', (e) => {
+    const ms = e.target.closest('[data-mscroll]');
+    if (ms) {
+      const track = body.querySelector('[data-mcards]');
+      const w = track.querySelector('.mcard')?.getBoundingClientRect().width || 240;
+      track.scrollBy({ left: Number(ms.dataset.mscroll) * (w + 12), behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+      return;
+    }
     const nav = e.target.closest('[data-cal]');
     if (nav && !nav.disabled) {
       const d = new Date(cal.y, cal.m + Number(nav.dataset.cal), 1);
