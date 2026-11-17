@@ -51,7 +51,7 @@ P['index.html'] = '''<section class="hero">
   </ul>
 </section>
 
-<section class="section sheet">
+<section class="section sheet intro-screen">
   <!--@decor:soft-->
   <div class="container intro">
     <div class="reveal">
